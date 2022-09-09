@@ -1,6 +1,5 @@
 #include "Board.hpp"
-utils::Board::Board() {
-   // initGrid();
+utils::Board::Board(int numOfRows, int numOfColumns) :size({ numOfRows,numOfColumns }) {
 };
 
 std::pair<int, int> utils::Board::getSize() {
