@@ -20,3 +20,6 @@ void utils::Board::initGrid() {
       }
    }
 }
+utils::Field utils::Board::getField(utils::Coordinates& coord){
+   return grid.at(coord.x).at(coord.y);
+}

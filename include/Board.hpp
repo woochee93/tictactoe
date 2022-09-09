@@ -3,6 +3,7 @@
 #include <utility>
 #include <vector>
 #include "Field.hpp"
+#include "Coordinates.hpp"
 namespace utils {
    class Board {
       std::pair <int, int> size;
@@ -11,5 +12,6 @@ namespace utils {
    public:
       Board(int numOfRows, int numOfColumns);
       std::pair<int, int> getSize();
+      Field getField(Coordinates&);
    };
 }

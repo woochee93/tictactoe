@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "Board.hpp"
+#include "Coordinates.hpp"
+#include "Field.hpp"
 #include <utility>
 
 class BoardTest :public::testing::Test {
@@ -23,7 +25,8 @@ TEST_F(BoardTest, getSizeShouldReturn4X6WhenInitValueIs4x6) {
 TEST_F(BoardTest, getFieldIn3x3BoardShouldReturnEmptyForAllCoord) {
     for (int row{ 0 }; row < 3; row++) {
         for (int column{ 0 }; column < 3; column++) {
-            EXPECT_EQ(board3x3.getField(row, column), EMPTY);
+            utils::Coordinates coordToTest {row, column};
+            EXPECT_EQ(board3x3.getField(coordToTest), utils::Field::EMPTY);
         }
     }
 }
@@ -34,8 +37,8 @@ TEST(BoardTesting, getSizeShouldReturn0X0WhenNumOfRowsIsLessThan3) {
     EXPECT_EQ(actualSize.second, 0);
 }
 TEST(BoardTesting, getSizeShouldReturn0X0WhenNumOfColumnIsLessThan3) {
-    utils::Board board2x3{ 3,2 };
-    std::pair<int, int> actualSize = board2x3.getSize();
+    utils::Board board{ 3,2 };
+    std::pair<int, int> actualSize = board.getSize();
     EXPECT_EQ(actualSize.first, 0);
     EXPECT_EQ(actualSize.second, 0);
 }
