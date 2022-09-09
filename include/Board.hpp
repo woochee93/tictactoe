@@ -7,6 +7,7 @@ namespace utils {
    class Board {
       std::pair <int, int> size{ 3,3 };
       std::vector<std::vector<utils::Field>> grid;
+      void initGrid();
    public:
       Board();
       std::pair<int,int> getSize ();
