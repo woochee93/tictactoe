@@ -20,6 +20,17 @@ void utils::Board::initGrid() {
       }
    }
 }
-utils::Field utils::Board::getField(utils::Coordinates& coord){
+utils::Field utils::Board::getField(utils::Coordinates& coord) {
    return grid.at(coord.x).at(coord.y);
+}
+
+bool utils::Board::setField(utils::Coordinates& coord, int newState) {
+   bool isValidXCoord = (coord.x < size.first) && (coord.x >= 0);
+   bool isValidYCoord = (coord.y < size.second) && (coord.x >= 0);
+   bool isValidCoord = isValidXCoord && isValidYCoord && (getField(coord) == utils::Field::EMPTY);
+   if (!isValidCoord)
+      return false;
+
+   grid.at(coord.x).at(coord.y) = static_cast<utils::Field>(newState);
+   return true;
 }

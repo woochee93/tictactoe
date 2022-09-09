@@ -34,6 +34,25 @@ TEST_F(BoardTest, getSizeShouldThrowErrWhenPassedOutOfRange) {
     utils::Coordinates outOfRangeCoord{ 4,4 };
     EXPECT_ANY_THROW(board3x3.getField(outOfRangeCoord));
 }
+TEST_F(BoardTest, setFieldShouldSetXOnFirstField) {
+    utils::Coordinates firstFieldCoord{ 0,0 };
+    board4x6.setField(firstFieldCoord, utils::Field::X);
+    EXPECT_EQ(board4x6.getField(firstFieldCoord), utils::Field::X);
+}
+TEST_F(BoardTest, setFieldShouldReturnTrueWhenPassedFirstField) {
+    utils::Coordinates firstFieldCoord{ 0,0 };
+    EXPECT_TRUE(board4x6.setField(firstFieldCoord, utils::Field::X));
+}
+TEST_F(BoardTest, setFieldShouldReturnFalseWhenPassedOutOfRangeCoord) {
+    utils::Coordinates outOfRangeCoord{ 10,10 };
+    EXPECT_FALSE(board4x6.setField(outOfRangeCoord, utils::Field::X));
+}
+TEST_F(BoardTest, setFieldShouldReturnFalseWhenPassedCoordPointingToNotEmptyField) {
+    utils::Coordinates coord{ 2,2 };
+    board3x3.setField(coord, utils::Field::O);
+    EXPECT_FALSE(board3x3.setField(coord, utils::Field::X));
+}
+
 TEST(BoardTesting, getSizeShouldReturn0X0WhenNumOfRowsIsLessThan3) {
     utils::Board board2x3{ 2,3 };
     std::pair<int, int> actualSize = board2x3.getSize();
@@ -46,3 +65,4 @@ TEST(BoardTesting, getSizeShouldReturn0X0WhenNumOfColumnIsLessThan3) {
     EXPECT_EQ(actualSize.first, 0);
     EXPECT_EQ(actualSize.second, 0);
 }
+

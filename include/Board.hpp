@@ -13,5 +13,6 @@ namespace utils {
       Board(int numOfRows, int numOfColumns);
       std::pair<int, int> getSize();
       Field getField(Coordinates&);
+      bool setField(Coordinates&, int);
    };
 }
