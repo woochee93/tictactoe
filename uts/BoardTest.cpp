@@ -3,7 +3,7 @@
 #include "Coordinates.hpp"
 #include "Field.hpp"
 #include <utility>
-
+#include <stdexcept>
 class BoardTest :public::testing::Test {
 protected:
     utils::Board board3x3{ 3,3 };
@@ -25,10 +25,14 @@ TEST_F(BoardTest, getSizeShouldReturn4X6WhenInitValueIs4x6) {
 TEST_F(BoardTest, getFieldIn3x3BoardShouldReturnEmptyForAllCoord) {
     for (int row{ 0 }; row < 3; row++) {
         for (int column{ 0 }; column < 3; column++) {
-            utils::Coordinates coordToTest {row, column};
+            utils::Coordinates coordToTest{ row, column };
             EXPECT_EQ(board3x3.getField(coordToTest), utils::Field::EMPTY);
         }
     }
+}
+TEST_F(BoardTest, getSizeShouldThrowErrWhenPassedOutOfRange) {
+    utils::Coordinates outOfRangeCoord{ 4,4 };
+    EXPECT_ANY_THROW(board3x3.getField(outOfRangeCoord));
 }
 TEST(BoardTesting, getSizeShouldReturn0X0WhenNumOfRowsIsLessThan3) {
     utils::Board board2x3{ 2,3 };
